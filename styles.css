@@ -4,6 +4,56 @@
     border: border-box;
 }
 
-.wrapper{
-    
+/*The head of the web */
+.wrapper-head {
+    padding-top: 1em;
+    padding-left: 2em;
+    padding-bottom: 1em;
+    padding-right: 2em;
+    background-image: url("Background1.png");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-attachment: fixed;
 }
+
+
+.wrapper-head .logo {
+    float: left;
+    width:10rem;
+    border-width: 1.5em;
+    border-radius: 2.5rem;
+}
+
+.wrapper-head .logo img{
+    max-height: 80%;
+    max-width: 80%; }
+
+.quote {
+    display: flex;
+    justify-content: center;
+    color: white;
+    padding-top: 10px;
+}
+
+ul.topnav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  ul.topnav li {float: right;}
+  
+  ul.topnav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  ul.topnav li a:hover:not(.active) {background-color: #111;}
+  
+  ul.topnav li a.active {background-color: #04AA6D;}
+  
+  ul.topnav li.right {float: right;}
