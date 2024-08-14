@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items:center;
-    padding: 10px 2%;
+    padding: 20px 2%;
     background-color: black;
 }
 
@@ -41,18 +41,3 @@ header {
     border-radius: 10%;
 }
 
-button {
-    float: right;
-    padding: 9px 23px;
-    background-color: cornflowerblue;
-    border:none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-
-button:hover{
-    color: black;
-    background-color: white;
-}
