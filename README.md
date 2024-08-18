@@ -22,8 +22,6 @@ Saya ingin mengucapkan terima kasih yang sebesar-besarnya kepada:
 - **Teman-teman:** Terima kasih telah selalu mendukung dan menemani saya dalam setiap langkah.
 - **Pembaca:** Terima kasih telah meluangkan waktu untuk membaca dan terlibat dalam blog ini.
 
-Jangan ragu untuk menjelajahi konten yang ada dan meninggalkan komentar. Saya sangat menghargai setiap interaksi dan umpan balik dari Anda!
-
 Salam hangat,  
 Arsenius.
 
