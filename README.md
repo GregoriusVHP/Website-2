@@ -7,7 +7,7 @@ Halo, saya senang Anda mampir! Berikut ini adalah sedikit informasi tentang diri
 
 - **Hobi:** Saya sangat menikmati bermain futsal. Olahraga ini bukan hanya hobi, tetapi juga cara saya untuk bersosialisasi dan menjaga kebugaran tubuh.
 - **Bahasa Favorit:** Bahasa Inggris adalah bahasa favorit saya. Saya merasa nyaman berkomunikasi dalam bahasa ini dan sering menggunakannya dalam berbagai aktivitas sehari-hari.
-- **Status Saat Ini:** Saat ini, saya adalah seorang siswa SMA tingkat 2. Saya terus belajar dan mengejar pengetahuan untuk masa depan yang lebih baik.
+- **Status Saat Ini:** Saat ini, saya adalah seorang siswa SMA tingkat 2. Saya terus belajar dan mengejar pengetahuan, khususnya dalam bidang teknologi informasi.
 - **Negara:** Saya berasal dari Indonesia, dan saya bangga dengan kekayaan budaya dan keindahan negeri ini. :)
 
 ## 🎯 Tujuan Website Ini
