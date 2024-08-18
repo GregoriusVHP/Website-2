@@ -12,7 +12,7 @@ Halo, saya senang Anda mampir! Berikut ini adalah sedikit informasi tentang diri
 
 ## 🎯 Tujuan Website Ini
 
-Saya membuat situs web ini untuk **membagikan pengalaman** saya dengan orang-orang dan **mengajak mereka** untuk menghibur dengan cerita kehidupan sehari-hari saya. Semoga tulisan-tulisan saya dapat memberikan inspirasi dan dampak yang baik bagi pembaca.
+Saya membuat situs web ini untuk **membagikan pengalaman** saya dengan orang-orang dan **menghibur mereka** dengan cerita kehidupan sehari-hari saya. Semoga tulisan-tulisan saya dapat memberikan inspirasi dan dampak yang baik bagi pembaca.
 
 ## 🙏 Terima Kasih Khusus
 
