@@ -1,9 +1,8 @@
 # Informatika: Project Kelas XI P4
 ## Selamat Datang di Profil Saya!
 
-Halo, saya senang Anda mampir! Berikut ini adalah sedikit informasi tentang diri saya:
 
-## 🌟 Tentang Saya
+## 🌟 About Me
 
 - **Hobi:** Saya sangat menikmati bermain futsal. Olahraga ini bukan hanya hobi, tetapi juga cara saya untuk bersosialisasi dan menjaga kebugaran tubuh.
 - **Bahasa Favorit:** Bahasa Inggris adalah bahasa favorit saya. Saya merasa nyaman berkomunikasi dalam bahasa ini dan sering menggunakannya dalam berbagai aktivitas sehari-hari.
