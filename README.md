@@ -1,7 +1,5 @@
 # Informatika: Project Kelas XI P4
 
-
-
 ## 🌟 About Me
 
 - **Hobi:** Saya sangat menikmati bermain futsal. Olahraga ini bukan hanya hobi, tetapi juga cara saya untuk bersosialisasi dan menjaga kebugaran tubuh.
