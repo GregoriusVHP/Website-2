@@ -9,10 +9,10 @@ html {
 }
 
 /*The head of the web */
-li, a{
+header li, a{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 300;
-    font-size: 23px;
+    font-size: 20px;
     text-decoration: none;
 }
 
@@ -92,23 +92,51 @@ main {
 }
 
 .content1-wrapper {
+    display: block;
+    align-items: center;
     width: 300px;
-    height: 200px;
+    height: 350px;
     padding: 20px;
+    padding-left: 30px;
     border:2px ridge #ccc;
     margin:4px;
     border-radius: 10%;
+    overflow: hidden;
+    object-fit: scale-down;
+    
+}
+
+.content1-isi a {
+    padding: 8px;
+    border-radius: 20%;
+    font-weight: 300;
+    font-size: 15px;
+}
+.content1-isi img{
+    height: 70%;
+    width:70%;
 }
 
 .content2-wrapper {
     width: 300px;
-    height: 200px;
+    height: 350px;
     padding: 20px;
     border:2px ridge #ccc;
     margin:4px;
     border-radius: 10%;
 }
 
+.content2-isi img{
+    height: 70%;
+    width: 70%;
+}
+
+.content2-isi a {
+    padding: 8px;
+    border-radius: 20%;
+    font-weight: 300;
+    font-size: 15px;
+}
 /* footer */
 footer{
     display: block;
