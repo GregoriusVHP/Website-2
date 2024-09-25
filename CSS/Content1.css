@@ -1,18 +1,11 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* FONTS */
 
-html {
-    scroll-behavior: smooth ;
-}
 
 /*The head of the web */
-li, a{
+header li, a{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 300;
-    font-size: 23px;
+    font-size: 20px;
     text-decoration: none;
 }
 

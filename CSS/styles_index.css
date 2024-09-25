@@ -65,7 +65,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;            
-    font-size: 20px;
+    font-size: 2vw;
     color: #ccc;
     padding-top: 5rem;
     padding-bottom: 6rem;
@@ -92,9 +92,14 @@ main {
     display: flex;
     justify-content:space-around;
     align-items: center;
-    height: 20em;
+    height: 25em;
     background-color: #ffff;
     font-family: Arial, sans-serif;
+    font-size: 1.4vw;
+}
+
+#Judul h1{
+    font-size: 6vw;
 }
 
 .content1-wrapper {
@@ -102,9 +107,9 @@ main {
     border: 1px solid #ccc;
     background-color: #fff;
     overflow: hidden;
-    max-width: 600px;
+    max-width: 40vw;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 2vw;
     
 }
 
@@ -159,9 +164,9 @@ main {
     border: 1px solid #ccc;
     background-color: #fff;
     overflow: hidden;
-    max-width: 600px;
+    max-width: 40vw;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 2vw;
 }
 
 .content2-image{
@@ -208,13 +213,14 @@ main {
 .content2-isi a:hover{
     color:#ffffff
 }
+
 /* footer */
 footer{
     display: block;
     background-color: #03346E;
     color:#E2E2B6;
     text-align: center;
-    padding-top: 0.5rem;
+    padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 1rem;
 } 
@@ -224,3 +230,6 @@ footer h5{
     font-size: 30px;
     gap: 2rem;
 }
+
+/*about page */
+
