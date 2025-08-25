@@ -22,7 +22,11 @@ Saya ingin mengucapkan terima kasih yang sebesar-besarnya kepada:
 Salam hangat,  
 Valery.
 
-[WebPage](https://gregoriusvhp.github.io/Website-2/Index.html)
-
+Beberapa project yang telah saya buat:
+- Blog Perjalanan Hidup [WebPage](https://gregoriusvhp.github.io/Website-2/Index.html)
+- Pomodoro Timer
+- Landing Page
+- Online Shop Site
+- Portfolio Website
 
 
