@@ -23,8 +23,8 @@ Salam hangat,
 Valery.
 
 Beberapa project yang telah saya buat:
-- Blog Perjalanan Hidup [WebPage](https://gregoriusvhp.github.io/Website-2/Index.html)
-- Pomodoro Timer
+- [Blog Perjalanan Hidup](https://gregoriusvhp.github.io/Website-2/html/BLOG/Index.html)
+- [Pomodoro Timer](https://gregoriusvhp.github.io/Website-2/html/Pomodoro/index.html)
 - Landing Page
 - Online Shop Site
 - Portfolio Website
