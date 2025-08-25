@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pomodoro Timer – Simple</title>
+  <!-- Tailwind CSS hasil build CLI -->
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 font-sans">
+  <main class="max-w-2xl mx-auto p-6">
+    <header class="text-center mb-8">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Pomodoro Timer</h1>
+      <p class="text-slate-300 mt-2">Fokus 25 menit, rehat 5 menit. Sederhana, ringan, tanpa library.</p>
+    </header>
+
+    <!-- Timer Card -->
+    <section class="bg-slate-900/40 rounded-2xl shadow-xl ring-1 ring-white/10 p-6 sm:p-8">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between">
+          <span id="modeLabel" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold bg-indigo-500/10 text-indigo-300 ring-1 ring-indigo-500/30">Work</span>
+          <div class="text-sm text-slate-300">Siklus: <span id="cycleText" class="font-semibold">1 / 4</span></div>
+        </div>
+
+        <div class="text-center">
+          <div class="text-[64px] sm:text-[88px] leading-none font-extrabold tabular-nums drop-shadow" id="timeDisplay">25:00</div>
+          <div class="mt-2 text-slate-400 text-sm">Target selesai: <span id="etaText">—</span></div>
+        </div>
+
+        <div class="w-full h-3 bg-slate-700/60 rounded-full overflow-hidden">
+          <div id="progressBar" class="h-full w-0 bg-indigo-500 transition-[width] duration-300"></div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <button id="startPauseBtn" class="px-5 py-2.5 rounded-xl bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-600 text-white font-semibold shadow focus:outline-none focus:ring-2 focus:ring-indigo-400">Mulai</button>
+          <button id="resetBtn" class="px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/90 font-semibold">Reset</button>
+          <button id="skipBtn" class="px-4 py-2.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white/90 font-semibold">Lewati</button>
+          <button id="notifyBtn" class="px-4 py-2.5 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 text-white font-semibold">Notifikasi</button>
+          <label class="inline-flex items-center gap-2 text-sm text-slate-300 select-none">
+            <input id="soundToggle" type="checkbox" class="size-4 rounded border-slate-500" checked>
+            Bunyi bel
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8 bg-slate-900/40 rounded-2xl shadow-xl ring-1 ring-white/10 p-6 sm:p-8">
+      <h2 class="text-lg font-bold mb-4">Pengaturan</h2>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <label class="block">
+          <span class="text-sm text-slate-300">Durasi kerja (menit)</span>
+          <input id="workInput" type="number" min="1" max="120" value="25" class="mt-1 w-full bg-slate-800 rounded-xl border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </label>
+        <label class="block">
+          <span class="text-sm text-slate-300">Istirahat pendek (menit)</span>
+          <input id="shortInput" type="number" min="1" max="60" value="5" class="mt-1 w-full bg-slate-800 rounded-xl border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </label>
+        <label class="block">
+          <span class="text-sm text-slate-300">Istirahat panjang (menit)</span>
+          <input id="longInput" type="number" min="1" max="90" value="15" class="mt-1 w-full bg-slate-800 rounded-xl border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </label>
+        <label class="block">
+          <span class="text-sm text-slate-300">Siklus sebelum istirahat panjang</span>
+          <input id="cyclesInput" type="number" min="1" max="12" value="4" class="mt-1 w-full bg-slate-800 rounded-xl border border-slate-700 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        </label>
+      </div>
+      <div class="mt-4 flex items-center gap-3">
+        <button id="saveBtn" class="px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-semibold">Simpan</button>
+        <span class="text-sm text-slate-400">Pengaturan tersimpan otomatis di browser (localStorage).</span>
+      </div>
+    </section>
+
+    <footer class="mt-10 text-center text-xs text-slate-400">
+      Dibuat dengan ❤️ menggunakan HTML, Tailwind & JS.
+    </footer>
+  </main>
+
+  <audio id="beep" preload="auto">
+    <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQwAAAAA/////wAAAP///wAAAP///wAAAP///wAAAP///wAAAP///wAAAP///w==" type="audio/wav">
+  </audio>
+
+  <script>
+    // ---- State ----
+    const els = {
+      timeDisplay: document.getElementById('timeDisplay'),
+      progressBar: document.getElementById('progressBar'),
+      startPauseBtn: document.getElementById('startPauseBtn'),
+      resetBtn: document.getElementById('resetBtn'),
+      skipBtn: document.getElementById('skipBtn'),
+      notifyBtn: document.getElementById('notifyBtn'),
+      soundToggle: document.getElementById('soundToggle'),
+      modeLabel: document.getElementById('modeLabel'),
+      cycleText: document.getElementById('cycleText'),
+      etaText: document.getElementById('etaText'),
+      workInput: document.getElementById('workInput'),
+      shortInput: document.getElementById('shortInput'),
+      longInput: document.getElementById('longInput'),
+      cyclesInput: document.getElementById('cyclesInput'),
+      saveBtn: document.getElementById('saveBtn'),
+      beep: document.getElementById('beep'),
+    };
+
+    const defaultSettings = { work: 25, short: 5, long: 15, cycles: 4 };
+    let settings = loadSettings();
+
+    let mode = 'work'; // 'work' | 'short' | 'long'
+    let cycle = 1;
+    let totalCyclesBeforeLong = settings.cycles;
+    let durationSec = settings.work * 60;
+    let remainingSec = durationSec;
+    let timer = null;
+    let endTime = null;
+
+    // ---- Init ----
+    applySettingsToInputs();
+    render();
+
+    // ---- Events ----
+    els.startPauseBtn.addEventListener('click', toggleStartPause);
+    els.resetBtn.addEventListener('click', resetTimer);
+    els.skipBtn.addEventListener('click', nextPhase);
+    els.notifyBtn.addEventListener('click', requestNotification);
+    els.saveBtn.addEventListener('click', saveSettings);
+
+    // ---- Functions ----
+    function toggleStartPause() {
+      if (timer) {
+        // pause
+        clearInterval(timer);
+        timer = null;
+        // recompute remaining from endTime
+        if (endTime) remainingSec = Math.max(0, Math.round((endTime - Date.now()) / 1000));
+        els.startPauseBtn.textContent = 'Lanjut';
+      } else {
+        // start
+        endTime = Date.now() + remainingSec * 1000;
+        timer = setInterval(tick, 250);
+        els.startPauseBtn.textContent = 'Jeda';
+      }
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = null;
+      mode = 'work';
+      cycle = 1;
+      durationSec = settings.work * 60;
+      remainingSec = durationSec;
+      endTime = null;
+      render();
+      els.startPauseBtn.textContent = 'Mulai';
+    }
+
+    function nextPhase() {
+      // Switch mode
+      if (mode === 'work') {
+        if (cycle % totalCyclesBeforeLong === 0) {
+          mode = 'long';
+          durationSec = settings.long * 60;
+        } else {
+          mode = 'short';
+          durationSec = settings.short * 60;
+        }
+      } else {
+        // from any break go to next work
+        mode = 'work';
+        durationSec = settings.work * 60;
+        if (cycle % totalCyclesBeforeLong === 0) {
+          cycle = 1; // reset cycle after long break
+        } else if (mode === 'work') {
+          // nothing
+        }
+      }
+      if (mode === 'work' && els.startPauseBtn.textContent === 'Jeda') {
+        // started via auto-switch; keep running
+      }
+      if (mode !== 'work') {
+        // Increment cycle only when we just finished a work session
+        if (cycle % totalCyclesBeforeLong !== 0) cycle += 1; else cycle = 1;
+      }
+      remainingSec = durationSec;
+      endTime = Date.now() + remainingSec * 1000;
+      notify(`${labelForMode(mode)} dimulai`);
+      render();
+    }
+
+    function tick() {
+      const now = Date.now();
+      remainingSec = Math.max(0, Math.round((endTime - now) / 1000));
+      render();
+      if (remainingSec <= 0) {
+        clearInterval(timer);
+        timer = null;
+        playBeep();
+        autoAdvance();
+      }
+    }
+
+    function autoAdvance() {
+      // Pindah fase otomatis setelah selesai
+      if (mode === 'work') {
+        if (cycle % totalCyclesBeforeLong === 0) {
+          mode = 'long';
+          durationSec = settings.long * 60;
+        } else {
+          mode = 'short';
+          durationSec = settings.short * 60;
+        }
+        // selesai kerja -> increment cycle
+        if (cycle % totalCyclesBeforeLong !== 0) cycle += 1; else cycle = 1;
+      } else {
+        mode = 'work';
+        durationSec = settings.work * 60;
+      }
+      remainingSec = durationSec;
+      endTime = Date.now() + remainingSec * 1000;
+      render();
+      notify(`${labelForMode(mode)} dimulai`);
+      // Auto-start selanjutnya
+      toggleStartPause();
+    }
+
+    function render() {
+      // time text
+      const m = Math.floor(remainingSec / 60).toString().padStart(2, '0');
+      const s = Math.floor(remainingSec % 60).toString().padStart(2, '0');
+      els.timeDisplay.textContent = `${m}:${s}`;
+
+      // progress
+      const pct = 100 - (remainingSec / durationSec) * 100;
+      els.progressBar.style.width = `${pct}%`;
+
+      // label
+      els.modeLabel.textContent = labelForMode(mode);
+      els.modeLabel.className = `inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold ring-1 ${
+        mode === 'work' ? 'bg-indigo-500/10 text-indigo-300 ring-indigo-500/30' :
+        mode === 'short' ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-500/30' :
+                           'bg-amber-500/10 text-amber-300 ring-amber-500/30'
+      }`;
+
+      els.cycleText.textContent = `${cycle} / ${totalCyclesBeforeLong}`;
+
+      // ETA
+      if (timer) {
+        const eta = new Date(Date.now() + remainingSec * 1000);
+        els.etaText.textContent = eta.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } else {
+        els.etaText.textContent = '—';
+      }
+    }
+
+    function labelForMode(m) {
+      return m === 'work' ? 'Kerja' : (m === 'short' ? 'Istirahat Pendek' : 'Istirahat Panjang');
+    }
+
+    function playBeep() {
+      if (!els.soundToggle.checked) return;
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(880, ctx.currentTime);
+        g.gain.setValueAtTime(0.0001, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.3);
+        o.connect(g).connect(ctx.destination);
+        o.start();
+        o.stop(ctx.currentTime + 0.35);
+      } catch (e) {
+        // Fallback ke audio element
+        els.beep.currentTime = 0;
+        els.beep.play().catch(() => {});
+      }
+    }
+
+    function notify(message) {
+      if (Notification?.permission === 'granted') {
+        new Notification('Pomodoro', { body: message });
+      }
+    }
+
+    function requestNotification() {
+      if (!('Notification' in window)) {
+        alert('Browser Anda tidak mendukung Notification API.');
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        new Notification('Pomodoro', { body: 'Notifikasi sudah aktif.' });
+        return;
+      }
+      Notification.requestPermission().then((perm) => {
+        if (perm === 'granted') {
+          new Notification('Pomodoro', { body: 'Notifikasi diaktifkan.' });
+        } else {
+          alert('Izin notifikasi ditolak.');
+        }
+      });
+    }
+
+    function saveSettings() {
+      const s = {
+        work: clamp(parseInt(els.workInput.value || defaultSettings.work, 10), 1, 120),
+        short: clamp(parseInt(els.shortInput.value || defaultSettings.short, 10), 1, 60),
+        long: clamp(parseInt(els.longInput.value || defaultSettings.long, 10), 1, 90),
+        cycles: clamp(parseInt(els.cyclesInput.value || defaultSettings.cycles, 10), 1, 12),
+      };
+      settings = s;
+      totalCyclesBeforeLong = settings.cycles;
+      localStorage.setItem('pomodoroSettings', JSON.stringify(settings));
+      // Update durasi hanya jika timer tidak sedang berjalan
+      if (!timer) {
+        durationSec = (mode === 'work' ? settings.work : mode === 'short' ? settings.short : settings.long) * 60;
+        remainingSec = durationSec;
+        render();
+      }
+    }
+
+    function loadSettings() {
+      try {
+        const raw = localStorage.getItem('pomodoroSettings');
+        if (!raw) return { ...defaultSettings };
+        const parsed = JSON.parse(raw);
+        return { ...defaultSettings, ...parsed };
+      } catch {
+        return { ...defaultSettings };
+      }
+    }
+
+    function applySettingsToInputs() {
+      els.workInput.value = settings.work;
+      els.shortInput.value = settings.short;
+      els.longInput.value = settings.long;
+      els.cyclesInput.value = settings.cycles;
+      durationSec = settings.work * 60;
+      remainingSec = durationSec;
+      totalCyclesBeforeLong = settings.cycles;
+    }
+
+    function clamp(n, min, max) { return Math.max(min, Math.min(max, isNaN(n) ? min : n)); }
+  </script>
+</body>
+</html>
